@@ -1,8 +1,9 @@
 import React from 'react'
+import Post from '../components/Post'
 function Home() {
   return (
-    <div>This is Home page Content</div>
-  )
+<Post />
+    )
 }
 
 export default Home
