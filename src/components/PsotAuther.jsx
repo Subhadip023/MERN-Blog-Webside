@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Avatar from "../img/Author(dumy).jpg";
+import Avatar from "../img/Author(dumy).jpeg";
 const PostAuther = () => {
   return (
     <Link to={`/posts/users/sdfsdf`} className="post_author">

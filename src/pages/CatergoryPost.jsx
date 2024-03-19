@@ -1,11 +1,32 @@
-import React from 'react'
+import { DUMMY_POSTS } from "../data.js";
+import React, { useState } from "react";
+import Postitem from "../components/Postitem.jsx";
 
-function CatergoryPost() {
+
+function CategoryPost() {
+  const [posts, setPosts] = useState(DUMMY_POSTS);
   return (
-    <div>
-      this is CatergoryPost page 
-    </div>
-  )
+    
+    <section className="author-posts">
+      <div className="container post_conatainer">
+      {posts.length > 0 ? posts.map(({ id, thumbnail, category, title, desc, authorID }) => (
+        <Postitem
+          key={id}
+          id={id}
+          thumbnail={thumbnail}
+          category={category}
+          title={title}
+          desc={desc}
+          authorID={authorID}
+        />
+      ))
+    : <h2 className="center">No post Fund </h2>
+    }   
+       </div>
+
+    </section>
+
+  );
 }
 
-export default CatergoryPost
+export default CategoryPost;
