@@ -265,8 +265,8 @@ textarea {
   border-radius: var(--radius-1);
   resize: none;
 }
-
 .form__error-message {
+
   background: var(--color-red);
   color: var(--color-white);
   font-size: 0.8rem;
@@ -278,7 +278,7 @@ textarea {
 
 .register,
 .login,
-.create-post {
+.create-post{
   width: var(--form-width);
   margin-inline: auto;
   height: calc(100vh - 12rem);
@@ -301,6 +301,16 @@ textarea {
 .login small a {
   color: var(--color-primary);
 }
+
+.ql-editor{
+  overflow: scroll;
+  background: var(--color-white);
+  height: 10rem !important;
+}
+
+
+
+
 /* authers */
 
 .auther_container {
