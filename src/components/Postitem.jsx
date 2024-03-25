@@ -9,7 +9,7 @@ const PostItem = ({ id, category, title, desc, authorID, thumbnail }) => {
   return (
     <article className="post">
       <div className="post_thumbnail">
-        <img src={thumbnail} alt={title} />
+      <img src={'/home/subhadip/Desktop/MERN-Blog-backend/server/uploads/Screenshot from 2024-03-18 20-48-2354624db2-b8fb-4a47-a40a-dc6b3e0343bd.png'} alt={title} />
       </div>
       <div className="post_content">
         <Link to={`/posts/${id}`}>

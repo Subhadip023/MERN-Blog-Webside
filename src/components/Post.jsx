@@ -1,31 +1,45 @@
-import { DUMMY_POSTS } from "../data.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Postitem from "./Postitem";
 
 
 function Post() {
-  const [posts, setPosts] = useState(DUMMY_POSTS);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/posts/")
+      .then(response => {
+        setPosts(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
-    
     <section className="posts">
       <div className="container post_conatainer">
-      {posts.length > 0 ? posts.map(({ id, thumbnail, category, title, desc, authorID }) => (
-        <Postitem
-          key={id}
-          id={id}
-          thumbnail={thumbnail}
-          category={category}
-          title={title}
-          desc={desc}
-          authorID={authorID}
-        />
-      ))
-    : <h2 className="center">No post Fund </h2>
-    }   
-       </div>
-
+        {posts.length > 0 ? (
+          posts.map(post => (
+            <Postitem
+              key={post._id}
+              id={post._id}
+              thumbnail={post.thumbnail}
+              category={post.category}
+              title={post.title}
+              desc={post.description}
+              // Assuming you have a creator field, you can pass it as well
+              creator={post.creator}
+              // If you need createdAt and updatedAt timestamps, you can pass them too
+              createdAt={post.createdAt}
+              updatedAt={post.updatedAt}
+            />
+          ))
+        ) : (
+          <h2 className="center">No posts found</h2>
+        )}
+      </div>
     </section>
-
   );
 }
 
