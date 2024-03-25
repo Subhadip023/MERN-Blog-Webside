@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import Navigate
+import axios from "axios";
 
 function Register() {
   const [userData, setUserData] = useState({
@@ -8,19 +9,39 @@ function Register() {
     password: "",
     password2: "",
   });
-
+  const [error, setError] = useState('');
+const navigate=useNavigate();
   const changeInputHandel = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
+
+  const registerUser = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData);
+      const newuser=await response.data;
+      console.log(newuser)
+      if (!response) {
+        setError("Couldn't register user. Please try again.");
+      } else {
+        // Redirect the user upon successful registration
+        navigate('/login'); // Use Navigate
+      }
+    } catch (error) {
+      setError(error.response.data.message); // Provide a generic error message
+    }
+  };
+
   return (
     <section className="register">
       <div className="container">
         <h2>Sign Up</h2>
 
-        <form className="form register_form">
-          <p className="form__error-message">This is an Error Message</p>
+        <form className="form register_form" onSubmit={registerUser}>
+          {error && <p className="form__error-message">{error}</p>}
           <input
             type="text"
             placeholder="Full Name"
@@ -54,7 +75,7 @@ function Register() {
           />
 
           <button type="submit" className="btn primary">
-            Resiter
+            Register
           </button>
         </form>
         <small>

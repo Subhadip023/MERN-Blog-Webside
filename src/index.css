@@ -260,13 +260,11 @@ footer {
 input,
 select,
 textarea {
-  width: 100%;
   padding: 0.6rem 1rem;
   border-radius: var(--radius-1);
   resize: none;
 }
 .form__error-message {
-
   background: var(--color-red);
   color: var(--color-white);
   font-size: 0.8rem;
@@ -278,7 +276,7 @@ textarea {
 
 .register,
 .login,
-.create-post{
+.create-post {
   width: var(--form-width);
   margin-inline: auto;
   height: calc(100vh - 12rem);
@@ -302,14 +300,11 @@ textarea {
   color: var(--color-primary);
 }
 
-.ql-editor{
+.ql-editor {
   overflow: scroll;
   background: var(--color-white);
   height: 10rem !important;
 }
-
-
-
 
 /* authers */
 
@@ -403,15 +398,14 @@ textarea {
   width: var(--form-width);
 }
 
-
 /* DashBoard */
 
 .dashboard_container {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  }
-  .dashboard_post {
+}
+.dashboard_post {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -421,20 +415,105 @@ textarea {
   border-radius: var(--radius-3);
 }
 
-.dashboard_post-info{
+.dashboard_post-info {
   display: flex;
   gap: 2rem;
   width: 100%;
   align-items: center;
 }
 
-.dashboard_post-thumbnail{
-width: 4rem;
-border-radius: var(--radius-1);
-overflow: hidden;
+.dashboard_post-thumbnail {
+  width: 4rem;
+  border-radius: var(--radius-1);
+  overflow: hidden;
 }
 
-.dashboard_post-action{
+.dashboard_post-action {
   display: flex;
   gap: 1rem;
+}
+
+/* style for mobile view */
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  .container {
+    width: var(--container-width-md);
+  }
+  /* Navbar */
+  .nav_container {
+    position: relative;
+  }
+  .nav_menu {
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav_menu li {
+    width: 100%;
+    box-shadow: -2rem 4rem 4rem ☐ rgba(0, 0, 0, 0.26);
+  }
+  .nav_menu li a {
+    display: block;
+    background: var(--color-white);
+    padding: 0.85rem 2.5rem;
+  }
+  .nav_toggle-btn {
+    display: inline-block;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .post_conatainer,
+  .author-post_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+
+  .post_detail {
+    width: var(--form-width--md);
+    background: transparent;
+    margin-inline: auto;
+    padding: 2rem 0;
+  }
+
+.auther_container {
+  display: grid;
+  grid-template-columns:1fr;
+  gap: 1rem;
+}
+.register ,.login,.create-post{
+  width: 100%;
+}
+.form.profile_form{
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.dashboard_post{
+  flex-direction: column;
+}
+.dashboard_post-info{
+  gap: 1.5rem;
+}
+.dashboard_post-thumbnail{
+  width: 5rem;
+}
+
+.footer_categories{
+  flex-direction: column;
+}
+
 }
