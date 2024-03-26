@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useContext,useEffect,useState}from "react";
 import PostAuther from "../components/PsotAuther";
 import { Link } from "react-router-dom";
 import Thumbnail1 from "../img/1.png";
