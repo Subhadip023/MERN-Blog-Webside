@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState ,useContext, useEffect} from "react";
 import { DUMMY_POSTS } from "../data";
 import { Link } from "react-router-dom";
-
+import { UserContext } from "../contex/userContex";
+import { Navigate } from "react-router-dom";
 function DashBoard() {
+  const {currentUser}=useContext(UserContext);
+  const navigate=Navigate()
   const [posts, setPosts] = useState(DUMMY_POSTS);
+
+useEffect(()=>{
+  if(!currentUser?.token);
+  navigate('/login')
+})
+
   return (
     
     <section className="dashboard">
