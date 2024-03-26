@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Postitem from "./Postitem";
-
+import Loader from './Loader' 
 
 function Post() {
   const [posts, setPosts] = useState([]);
-
+  const [isloading,setIsloading]=useState(false)
   useEffect(() => {
-    axios.get("http://localhost:5000/api/posts/")
+    setIsloading(true)
+     axios.get(`${process.env.REACT_APP_BASE_URL}/posts/`)
       .then(response => {
+        setIsloading(false)
         setPosts(response.data);
       })
       .catch(error => {
         console.error("Error fetching data:", error);
+        setIsloading(true)
+
       });
+      console.log(posts.creator)
   }, []);
+
+if(isloading){
+  return <Loader />;
+}
 
   return (
     <section className="posts">
@@ -29,7 +38,7 @@ function Post() {
               title={post.title}
               desc={post.description}
               // Assuming you have a creator field, you can pass it as well
-              creator={post.creator}
+              authorID={post.creator}
               // If you need createdAt and updatedAt timestamps, you can pass them too
               createdAt={post.createdAt}
               updatedAt={post.updatedAt}

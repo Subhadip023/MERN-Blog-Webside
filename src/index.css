@@ -481,7 +481,6 @@ textarea {
     gap: 1rem;
   }
 
-
   .post_detail {
     width: var(--form-width--md);
     background: transparent;
@@ -489,31 +488,33 @@ textarea {
     padding: 2rem 0;
   }
 
-.auther_container {
-  display: grid;
-  grid-template-columns:1fr;
-  gap: 1rem;
-}
-.register ,.login,.create-post{
-  width: 100%;
-}
-.form.profile_form{
-  margin-top: 2.5rem;
-  width: 100%;
-}
+  .auther_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .register,
+  .login,
+  .create-post {
+    width: 100%;
+  }
+  .form.profile_form {
+    margin-top: 2.5rem;
+    width: 100%;
+  }
 
-.dashboard_post{
-  flex-direction: column;
-}
-.dashboard_post-info{
-  gap: 1.5rem;
-}
-.dashboard_post-thumbnail{
-  width: 5rem;
-}
+  .dashboard_post {
+    flex-direction: column;
+  }
+  .dashboard_post-info {
+    gap: 1.5rem;
+  }
+  .dashboard_post-thumbnail {
+    width: 5rem;
+  }
 
-.footer_categories{
-  flex-direction: column;
-}
+  .footer_categories {
+    flex-direction: column;
+  }
 
 }

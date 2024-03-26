@@ -1,20 +1,22 @@
-import React, { useState ,useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DUMMY_POSTS } from "../data";
 import { Link } from "react-router-dom";
-import { UserContext } from "../contex/userContex";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+import { UserContext } from "../contex/userContex.js";
+
 function DashBoard() {
-  const {currentUser}=useContext(UserContext);
-  const navigate=Navigate()
+  const { currentUser } = useContext(UserContext);
+  const history = useNavigate();
   const [posts, setPosts] = useState(DUMMY_POSTS);
 
-useEffect(()=>{
-  if(!currentUser?.token);
-  navigate('/login')
-})
+  useEffect(() => {
+    if (!currentUser?.token) {
+      history('/login');
+    }
+  }, [currentUser, history]);
 
   return (
-    
     <section className="dashboard">
       {posts.length > 0 ? 
         <div className="container dashboard_container">

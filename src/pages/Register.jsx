@@ -9,8 +9,8 @@ function Register() {
     password: "",
     password2: "",
   });
-  const [error, setError] = useState('');
-const navigate=useNavigate();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const changeInputHandel = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
@@ -19,16 +19,19 @@ const navigate=useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData);
-      const newuser=await response.data;
-      console.log(newuser)
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/register`,
+        userData
+      );
+      const newuser = await response.data;
+      console.log(newuser);
       if (!response) {
         setError("Couldn't register user. Please try again.");
       } else {
         // Redirect the user upon successful registration
-        navigate('/login'); // Use Navigate
+        navigate("/login"); // Use Navigate
       }
     } catch (error) {
       setError(error.response.data.message); // Provide a generic error message

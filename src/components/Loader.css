@@ -1,0 +1,31 @@
+
+.loader {
+    margin: 6rem auto;
+    height: 53vh;
+    width: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .loader_img img {
+    height: 100px;
+    width:  100px;
+  }
+  .loader_img {
+    width: fit-content;
+  }
+
+  @media screen and (max-width: 800px) {
+  .loader{
+    width: fit-content;
+    height: 200px;
+    margin: 1rem auto;
+  }
+  .loader_img img {
+    height: 50px;
+    width:  50px;
+  }
+
+}
+  

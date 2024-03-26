@@ -5,6 +5,7 @@ import { CiMenuBurger } from "react-icons/ci";
 import { ImCross } from "react-icons/im";
 
 import { UserContext } from "../contex/userContex";
+import upperCase1st from '../uppercase1st.js'
 
 function Header() {
 
@@ -34,7 +35,7 @@ function Header() {
             <ul className="nav_menu">
               <li>
                 <Link to="/profile/sfdfs" onClick={CloseNavHandeler}>
-                  {currentUser.name}
+                  {upperCase1st(currentUser.name)}
                 </Link>
               </li>
               <li>
