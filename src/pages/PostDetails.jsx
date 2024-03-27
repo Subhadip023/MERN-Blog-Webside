@@ -17,7 +17,7 @@ const sanitizeHTML = (html) => ({
   __html: DOMPurify.sanitize(html)
 });
 
-  const { id } = useParams();
+  const {id} = useParams();
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false); // Typo fixed: isloading -> isLoading
@@ -31,13 +31,15 @@ const sanitizeHTML = (html) => ({
           `${process.env.REACT_APP_BASE_URL}/posts/${id}`
         );
         setPost(response.data);
+        console.log((response.data))
+        console.log(id)
       } catch (error) {
         setError(error);
       }
       setLoading(false);
     };
     getPost();
-  }, [id]); // Added id to the dependency array to trigger useEffect when id changes
+  }, []); // Added id to the dependency array to trigger useEffect when id changes
 
   if (isLoading) {
     return <Loader />;
