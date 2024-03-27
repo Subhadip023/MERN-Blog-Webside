@@ -1,20 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState  ,useContext} from "react";
+import { Link, useParams } from "react-router-dom";
 import Avatar from "../img/Author(dumy).jpeg";
 import { FaEdit } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
-
+import { UserContext } from "../contex/userContex";
+import upperCase1st from "../uppercase1st";
 function UserPRofile() {
+  const {currentUser}=useContext(UserContext);
   const [avatar, setAvatar] = useState(Avatar);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(`${currentUser.name}`);
+  const [email, setEmail] = useState(``);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setconfirmNewPassword] = useState("");
+  const {id}=useParams();
   return (
     <section className="profile">
       <div className="container profile_container">
-        <Link to={`/myposts/sdfsdf`} className="btn">
+      <Link to={`/myposts/${id}`} className="btn">
           My posts
         </Link>
         <div className="profile_details">
@@ -39,7 +42,7 @@ function UserPRofile() {
               <FaCheck />
             </button>
           </div>
-          <h1>Ernest Achiever</h1>
+          <h1>{upperCase1st(currentUser.name)}</h1>
           <form className="form profile_form">
             <p className="form__error-message">This is an Error Message</p>
             <input type="text" placeholder="Full Name" value={name} onChange={e=>setName(e.target.value)}/>

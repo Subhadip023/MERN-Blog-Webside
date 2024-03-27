@@ -1,31 +1,57 @@
-import { DUMMY_POSTS } from "../data.js";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Postitem from "../components/Postitem.jsx";
+import axios from "axios";
+import Loader from '../components/Loader.jsx' 
+import { useParams } from "react-router-dom";
 
 
 function AutherPost() {
-  const [posts, setPosts] = useState(DUMMY_POSTS);
+  const [posts, setPosts] = useState([]);
+  const [isloading,setIsloading]=useState(false)
+  const {id} =useParams();
+  useEffect(() => {
+    setIsloading(true)
+     axios.get(`${process.env.REACT_APP_BASE_URL}/posts/users/${id}`)
+      .then(response => {
+        console.log(response.data)
+        setIsloading(false)
+        setPosts(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+        setIsloading(false)
+
+      });
+  }, [id]);
+
+if(isloading){
+  return <Loader />;
+}
+
   return (
-    
-    <section className="author-posts">
-      <div className="container author-post_container">
-      {posts.length > 0 ? posts.map(({ id, thumbnail, category, title, desc, authorID }) => (
-        <Postitem
-          key={id}
-          id={id}
-          thumbnail={thumbnail}
-          category={category}
-          title={title}
-          desc={desc}
-          authorID={authorID}
-        />
-      ))
-    : <h2 className="center">No post Fund </h2>
-    }   
-       </div>
-
+    <section className="posts">
+      <div className="container post_conatainer">
+        {posts.length > 0 ? (
+          posts.map(post => (
+            <Postitem
+              key={post._id}
+              id={post._id}
+              thumbnail={post.thumbnail}
+              category={post.category}
+              title={post.title}
+              desc={post.description}
+              // Assuming you have a creator field, you can pass it as well
+              authorID={post.creator}
+              // If you need createdAt and updatedAt timestamps, you can pass them too
+              createdAt={post.createdAt}
+              updatedAt={post.updatedAt}
+            />
+          ))
+        ) : (
+          <h2 className="center">No posts found</h2>
+        )}
+      </div>
     </section>
-
   );
 }
 

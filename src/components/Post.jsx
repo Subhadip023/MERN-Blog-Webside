@@ -15,10 +15,9 @@ function Post() {
       })
       .catch(error => {
         console.error("Error fetching data:", error);
-        setIsloading(true)
+        setIsloading(false)
 
-      });
-      console.log(posts.creator)
+      }); 
   }, []);
 
 if(isloading){

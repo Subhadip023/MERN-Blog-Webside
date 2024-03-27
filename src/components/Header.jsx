@@ -34,7 +34,7 @@ function Header() {
           {currentUser?.id && isNavShowing && (
             <ul className="nav_menu">
               <li>
-                <Link to="/profile/sfdfs" onClick={CloseNavHandeler}>
+                <Link to={`/profile/${currentUser.id}`} onClick={CloseNavHandeler}>
                   {upperCase1st(currentUser.name)}
                 </Link>
               </li>
