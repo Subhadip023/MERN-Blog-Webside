@@ -246,7 +246,9 @@ footer {
   overflow: hidden;
 }
 .post_detail p {
-  margin-bottom: 0.7rem;
+  margin: 0.7rem 0;
+  text-align: justify;
+  font-size: 1.5rem;
 }
 
 /* Style For register from */
@@ -486,6 +488,13 @@ textarea {
     background: transparent;
     margin-inline: auto;
     padding: 2rem 0;
+    font-size: 1.5rem;
+  }
+  .post_detail p{
+    font-size: 1rem;
+  }
+  .post_detail p ol{
+padding-left: 6px;
   }
 
   .auther_container {
