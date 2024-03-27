@@ -9,7 +9,7 @@ function Auther() {
   useEffect(() => {
     const fetchAuthors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users/authors");
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/authors`);
         if (response && response.data && response.data.authors && response.data.authors.length > 0) {
           // If authors data exists in the response, set it to the state
           setAuthors(response.data.authors);
@@ -33,7 +33,7 @@ function Auther() {
           {authors.map(({ _id, avatar, name, posts }) => (
             <Link key={_id} to={`post/user/${_id}`} className="author">
               <div className="author_avatar">
-                <img src={`server/uploads/avatar-3680134_6401e7e2112-265a-452b-a6dc-aceb5a10e203.png`} alt={`Image Of ${name}`} />
+                <img src={`${process.env.REACT_APP_ASSETS_URL}/uplods/${avatar}`} alt={`Image Of ${name}`} />
               </div>
               <div className="author_info">
                 <h4>{name}</h4>
