@@ -31,8 +31,8 @@ const sanitizeHTML = (html) => ({
           `${process.env.REACT_APP_BASE_URL}/posts/${id}`
         );
         setPost(response.data);
-        console.log((response.data))
-        console.log(id)
+        // console.log((response.data))
+        // console.log(id)
       } catch (error) {
         setError(error);
       }
@@ -65,10 +65,8 @@ const sanitizeHTML = (html) => ({
           {/* Display post title or "Loading..." */}
           <div className="post-detail_thumbnail">
             <img
-              src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${
-                post ? post.thumbnail : ""
-              }`}
-              alt="Post thumbnail"
+              src={ post ? post.thumbnail : ""}
+              alt={post.title}
             />
           </div>
           {post && post.description && (

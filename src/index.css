@@ -133,8 +133,7 @@ nav {
   border: 2px solid var(--color-gray-900)
 }
 .nav_logo  img:hover{
-  box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.536);
-  border: 3px solid var(--color-gray-900)
+  box-shadow: 0px 4px 12px;
 
 
 }
@@ -193,6 +192,7 @@ footer {
   padding-bottom: 2rem;
   transition: var(--transition);
   cursor: default;
+  
 }
 .post:hover {
   box-shadow: 0 1.5rem 2rem rgba(0, 0, 0, 0.15);
@@ -311,7 +311,7 @@ textarea {
 .ql-editor {
   overflow: scroll;
   background: var(--color-white);
-  height: 10rem !important;
+  height: 30rem !important;
 }
 
 /* authers */
@@ -484,11 +484,15 @@ textarea {
   }
   .post_conatainer,
   .author-post_container {
+  
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+.post_thumbnail{
+  height: fit-content;
 
+}
   .post_detail {
     width: var(--form-width--md);
     background: transparent;

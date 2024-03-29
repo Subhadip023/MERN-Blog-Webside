@@ -57,9 +57,9 @@ function CreatePost() {
       const postData = new FormData();
       postData.set("title", title);
       postData.set("category", category);
-      postData.set("thumbnail", thumbnail);
+      postData.set("thumbnail", base64Image);
       postData.set("description", desc);
-      postData.set("imageBase64", base64Image); // Include base64 image in form data
+      // postData.set("imageBase64", base64Image); // Include base64 image in form data
   
       try {
         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/posts`, postData, {
