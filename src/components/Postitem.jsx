@@ -3,21 +3,20 @@ import { Link } from 'react-router-dom';
 import PostAuthor from './PsotAuther';
 import DOMPurify from 'dompurify';
 
-
-const PostItem = ({ id, category, title, desc, authorID, thumbnail ,updatedAt}) => {
+const PostItem = ({ id, category, title, desc, authorID, thumbnail, updatedAt }) => {
 
   const sanitizeHTML = (html) => ({
     __html: DOMPurify.sanitize(html)
   });
 
+  const shortDescription = desc.length > 145 ? desc.substr(0, 145) + '...' : desc;
+  const shortTitle = title.length > 30 ? title.substr(0, 30) + '...' : title;
 
-  const shortDescription=desc.length>145 ? desc.substr(0,145)+'...':desc;
-  const shortTitle=title.length>30 ? title.substr(0,30)+'...':title;
-  
   return (
     <article className="post">
       <div className="post_thumbnail">
-      <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${thumbnail}`} alt={title} />
+        {/* Display the thumbnail image */}
+        <img src={thumbnail} alt={title} />
       </div>
       <div className="post_content">
         <Link to={`/posts/${id}`}>
@@ -25,7 +24,7 @@ const PostItem = ({ id, category, title, desc, authorID, thumbnail ,updatedAt}) 
         </Link>
         <p dangerouslySetInnerHTML={sanitizeHTML(shortDescription)}></p>
         <div className="post_footer">
-          <PostAuthor authorID={authorID} updatedAt={updatedAt}/>
+          <PostAuthor authorID={authorID} updatedAt={updatedAt} />
           <Link to={`/posts/categories/${category}`} className='btn category'>{category}</Link>
         </div>
       </div>

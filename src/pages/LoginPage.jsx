@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState ,useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {UserContext} from '../contex/userContex.js'
+import Logout from "./Logout.jsx";
 
 function Login() {
   const [userData, setUserData] = useState({
@@ -24,6 +25,9 @@ function Login() {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, userData);
       const user = await response.data;
       setCurrentUser(user)
+      setTimeout(() => {
+        setCurrentUser(null);
+      }, 3600*1000);
       navigate('/');
     } catch (error) {
       setError(error.response.data.message || "An error occurred. Please try again.");

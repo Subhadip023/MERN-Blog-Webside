@@ -42,31 +42,41 @@ function CreatePost() {
 
   const createPosts = async (e) => {
     e.preventDefault();
-
+  
     // Check if any required fields are empty
     if (!title || !category || !desc || !thumbnail) {
       setError("Please fill in all fields.");
       return;
     }
-
-    const postData = new FormData();
-    postData.set("title", title);
-    postData.set("category", category);
-    postData.set("thumbnail", thumbnail);
-    postData.set("description", desc);
-
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/posts`, postData, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+  
+    // Convert image to base64
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64Image = reader.result;
+  
+      const postData = new FormData();
+      postData.set("title", title);
+      postData.set("category", category);
+      postData.set("thumbnail", thumbnail);
+      postData.set("description", desc);
+      postData.set("imageBase64", base64Image); // Include base64 image in form data
+  
+      try {
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/posts`, postData, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+  
         navigate("/");
-      
-    } catch (error) {
-      setError(error.response.data.message);
-    }
+      } catch (error) {
+        setError(error.response.data.message);
+      }
+    };
+  
+    // Read the image file as base64
+    reader.readAsDataURL(thumbnail);
   };
+  
 
   return (
     <section className="create-post">

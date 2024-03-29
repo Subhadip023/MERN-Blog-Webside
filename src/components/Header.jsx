@@ -1,6 +1,6 @@
 import React, { useState ,useContext,useEffect} from "react";
 import { Link } from "react-router-dom";
-import Logo from "../img/logo.png";
+import Logo from "../img/SBlog-logo.png";
 import { CiMenuBurger } from "react-icons/ci";
 import { ImCross } from "react-icons/im";
 

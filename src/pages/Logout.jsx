@@ -11,7 +11,7 @@ function Logout() {
     navigate('/login');
   }, []);
 
-  return null; // Since this component doesn't render anything, return null.
+  return null; 
 }
 
 export default Logout;
