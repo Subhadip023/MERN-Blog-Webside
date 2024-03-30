@@ -95,14 +95,16 @@ function EditPost() {
   
     // Check if an image is selected
     if (thumbnail) {
-      // Compress the selected image
-      const compressedThumbnail = await compressImage(thumbnail, 100); // 100kb limit
-      if (compressedThumbnail) {
-        postData.set("thumbnail", compressedThumbnail);
-      } else {
-        console.error("Failed to compress image.");
-        return;
-      }
+      postData.set("thumbnail",thumbnail );
+
+      // // Compress the selected image
+      // const compressedThumbnail = await compressImage(thumbnail, 100); // 100kb limit
+      // if (compressedThumbnail) {
+      //   postData.set("thumbnail", compressedThumbnail);
+      // } else {
+      //   console.error("Failed to compress image.");
+      //   return;
+      // }
     }
   
     // Send the data to the server
