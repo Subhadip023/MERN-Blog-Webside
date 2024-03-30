@@ -84,7 +84,7 @@ function CreatePost() {
       // postData.set("imageBase64", base64Image); // Include base64 image in form data
 
       try {
-
+        setIsloading(true)
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/posts`,
           postData,
@@ -95,8 +95,11 @@ function CreatePost() {
         );
  
         navigate("/");
+        setIsloading(false)
+
       } catch (error) {
         setError(error.response.data.message);
+        setIsloading(false)
 
       }
     };
@@ -106,7 +109,7 @@ function CreatePost() {
   };
 
 if(isloading){
-  <Loader/>
+  return <Loader/>
 }
 
   return (
