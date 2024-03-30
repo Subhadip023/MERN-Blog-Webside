@@ -256,6 +256,9 @@ footer {
   text-align: justify;
   font-size: 1.5rem;
 }
+.post_detail h1{
+  font-size: 2rem;
+}
 
 /* Style For register from */
 
@@ -504,6 +507,10 @@ textarea {
     font-size: 0.87rem;
     text-align: left;
   }
+  .post_detail h1{
+    font-size: 1.5rem;
+  }
+
   .post_detail p ol{
 padding-left: 6px;
   }
