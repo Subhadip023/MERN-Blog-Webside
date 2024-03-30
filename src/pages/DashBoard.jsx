@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from "../contex/userContex.js";
+import axios from "axios";
 
 function DashBoard() {
   const { currentUser } = useContext(UserContext);
@@ -14,6 +15,10 @@ function DashBoard() {
     if (!currentUser?.token) {
       history('/login');
     }
+    const getPost=async()=>{
+      const response=await axios.get(`${ori}`)
+    }
+
   }, [currentUser, history]);
 
   return (

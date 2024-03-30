@@ -13,7 +13,6 @@ function CategoryPost() {
     setIsloading(true)
      axios.get(`${process.env.REACT_APP_BASE_URL}/posts/categorys/${category}`)
       .then(response => {
-        console.log(response.data)
         setIsloading(false)
         setPosts(response.data);
       })
