@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Avatar from "../img/Author(dumy).jpeg";
+import Avatar from "../img/Author-img/avatar-659652_640.png";
 import upperCase1st from "../uppercase1st";
 import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
@@ -13,12 +13,14 @@ TimeAgo.addLocale(ru);
 
 const PostAuther = ({ authorID, updatedAt }) => {
   const [author, setAuthor] = useState(null);
+  const [avatar, setAvatar] = useState(Avatar);
 
   useEffect(() => {
     const getAuthor = async () => {
       try {
         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/${authorID}`);
         setAuthor(response?.data);
+setAvatar(response.data.avatar)
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +32,7 @@ const PostAuther = ({ authorID, updatedAt }) => {
   return (
     <Link to={`/posts/users/${authorID}`} className="post_author">
       <div className="post_author-avatar">
-        <img src={Avatar} alt="Author Avatar" />
+        <img src={avatar} alt="Author Avatar" />
       </div>
       <div className="post_author-details">
         {author && (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import avater_dumy from "../img/Author-img/user-33638_640.png";
 import upperCase1st from '../uppercase1st'
 
 function Auther() {
@@ -21,6 +20,7 @@ const {id}=useParams();
         ) {
           // If authors data exists in the response, set it to the state
           setAuthors(response.data.authors);
+          console.log(response.data)
         } else {
           // If no authors data received, log a message
           console.log("No authors data received");
@@ -43,11 +43,11 @@ const {id}=useParams();
               <div className="author_avatar">
                 {avatar ? (
                   <img
-                    src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`}
+                    src={avatar}
                     alt={`Image Of ${name}`}
                   />
                 ) : (
-                  <img src={avater_dumy} alt={`Image Of ${name}`} />
+                  <img src={avatar} alt={`Image Of ${name}`} />
                 )}{" "}
               </div>
               <div className="author_info">

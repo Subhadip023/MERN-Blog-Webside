@@ -1,23 +1,63 @@
-import React, { useState  ,useContext} from "react";
+import React, { useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import Avatar from "../img/Author(dumy).jpeg";
-import { FaEdit } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
+import { FaEdit, FaCheck } from "react-icons/fa";
 import { UserContext } from "../contex/userContex";
 import upperCase1st from "../uppercase1st";
-function UserPRofile() {
-  const {currentUser}=useContext(UserContext);
-  const [avatar, setAvatar] = useState(Avatar);
+import axios from "axios";
+
+function UserProfile() {
+  const { currentUser } = useContext(UserContext);
+  const token = currentUser.token;
+  const [avatar, setAvatar] = useState('');
   const [name, setName] = useState(`${currentUser.name}`);
-  const [email, setEmail] = useState(``);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setconfirmNewPassword] = useState("");
-  const {id}=useParams();
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [isAvatarTouched, setIsAvatarTouched] = useState(false);
+
+  const { id } = useParams();
+
+  const changeAvatarHandler = async () => {
+    setIsAvatarTouched(false);
+    try {
+      // Convert image to base64
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const base64Image = event.target.result;
+  
+        // Send base64 image to server
+        try {
+        setAvatar(base64Image)
+          const response = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
+            { avatar: base64Image}, {
+              withCredentials: true,
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          // setAvatar(response.data.avatar);
+        } catch (error) {
+          console.error("Error sending base64 image to server:", error);
+        }
+      };
+      reader.readAsDataURL(avatar);
+    } catch (error) {
+      console.error("Error converting image to base64:", error);
+    }
+  };
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    // Example:
+    console.log("Form submitted!");
+  };
+
   return (
     <section className="profile">
       <div className="container profile_container">
-      <Link to={`/myposts/${id}`} className="btn">
+        <Link to={`/myposts/${id}`} className="btn">
           My posts
         </Link>
         <div className="profile_details">
@@ -34,23 +74,49 @@ function UserPRofile() {
                 onChange={(e) => setAvatar(e.target.files[0])}
                 accept="png, jpg, jpeg"
               />
-              <label htmlFor="avatar">
+              <label htmlFor="avatar" onClick={() => setIsAvatarTouched(true)}>
                 <FaEdit />
               </label>
             </form>
-            <button className="profile_avatar-btn">
-              <FaCheck />
-            </button>
+            {isAvatarTouched && (
+              <button
+                className="profile_avatar-btn"
+                onClick={changeAvatarHandler}
+              >
+                <FaCheck />
+              </button>
+            )}
           </div>
           <h1>{upperCase1st(currentUser.name)}</h1>
-          <form className="form profile_form">
+          <form className="form profile_form" onSubmit={handleSubmit}>
             <p className="form__error-message">This is an Error Message</p>
-            <input type="text" placeholder="Full Name" value={name} onChange={e=>setName(e.target.value)}/>
-            <input type="email" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)}/>
-            <input type="password" placeholder="currentPassword" value={currentPassword} onChange={e=>setCurrentPassword(e.target.value)}/>
-            <input type="password" placeholder="newPassword" value={newPassword} onChange={e=>setNewPassword(e.target.value)}/>
-            <input type="password" placeholder="confirmNewPassword" value={confirmNewPassword} onChange={e=>setconfirmNewPassword(e.target.value)}/>
-            <button type="submit" className="btn primary">Update My details</button>
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="currentPassword"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="confirmNewPassword"
+              value={confirmNewPassword}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
+            />
+            <button type="submit" className="btn primary">
+              Update My details
+            </button>
           </form>
         </div>
       </div>
@@ -58,4 +124,4 @@ function UserPRofile() {
   );
 }
 
-export default UserPRofile;
+export default UserProfile;
