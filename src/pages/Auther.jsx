@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import avater_dumy from "../img/Author-img/user-33638_640.png";
+import upperCase1st from '../uppercase1st'
 
 function Auther() {
   const [authors, setAuthors] = useState([]);

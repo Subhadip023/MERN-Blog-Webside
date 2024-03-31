@@ -336,7 +336,7 @@ textarea {
   box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.07);
 }
 
-.author_avater {
+.author_avatar {
   width: 5rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
@@ -344,7 +344,7 @@ textarea {
   overflow: hidden;
 }
 
-.auther_info {
+.author_info {
   margin-top: 1rem;
 }
 
