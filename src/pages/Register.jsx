@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import Navigate
 import axios from "axios";
+import Loader from "../components/Loader";
 
 function Register() {
   const [userData, setUserData] = useState({
@@ -10,6 +11,7 @@ function Register() {
     password2: "",
   });
   const [error, setError] = useState("");
+  const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const changeInputHandel = (e) => {
     setUserData((prevState) => {
@@ -27,6 +29,7 @@ function Register() {
     }
   
     try {
+      setIsLoading(true)
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/users/register`,
         userData
@@ -35,16 +38,21 @@ function Register() {
       console.log(newuser);
       if (!response) {
         setError("Couldn't register user. Please try again.");
+        setIsLoading(false)
       } else {
         // Redirect the user upon successful registration
         navigate("/login"); // Use Navigate
       }
     } catch (error) {
       setError(error.response.data.message || "An error occurred. Please try again.");
+      setIsLoading(false)
+
     }
   };
   
-
+if(isloading){
+  return <Loader/>
+}
   return (
     <section className="register">
       <div className="container">
