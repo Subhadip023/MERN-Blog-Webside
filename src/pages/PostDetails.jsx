@@ -17,11 +17,11 @@ const sanitizeHTML = (html) => ({
   __html: DOMPurify.sanitize(html)
 });
 
-  const {id} = useParams();
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false); // Typo fixed: isloading -> isLoading
   const { currentUser } = useContext(UserContext);
+  const {id} = useParams();
 
   useEffect(() => {
     const getPost = async () => {
@@ -31,8 +31,8 @@ const sanitizeHTML = (html) => ({
           `${process.env.REACT_APP_BASE_URL}/posts/${id}`
         );
         setPost(response.data);
-        // console.log((response.data))
-        // console.log(id)
+        console.log((response.data))
+        console.log(id)
       } catch (error) {
         setError(error);
       }
@@ -52,7 +52,7 @@ const sanitizeHTML = (html) => ({
         <div className="post-detail_container container">
           <div className="post-detail_header">
             <PostAuther authorID={post.creator} updatedAt={post.updatedAt} />
-            {currentUser.id === post.creator && (
+            {currentUser?.id === post.creator && (
               <div className="post-detail_buttons">
                 <Link to={`/post/${post._id}/edit`} className="btn sm primary">
                   Edit
