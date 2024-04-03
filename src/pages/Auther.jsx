@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import upperCase1st from '../uppercase1st'
+import upperCase1st from '../uppercase1st.js'
 
 function Auther() {
   const [authors, setAuthors] = useState([]);
@@ -43,7 +43,7 @@ const {id}=useParams();
               <div className="author_avatar">
                 {avatar ? (
                   <img
-                    src={avatar}
+                    src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`}
                     alt={`Image Of ${name}`}
                   />
                 ) : (
@@ -51,7 +51,7 @@ const {id}=useParams();
                 )}{" "}
               </div>
               <div className="author_info">
-                <h4>{name}</h4>
+                <h4>{upperCase1st(name)}</h4>
                 <p>{posts}</p>
               </div>
             </Link>

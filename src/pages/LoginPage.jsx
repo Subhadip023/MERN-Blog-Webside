@@ -3,6 +3,7 @@ import React, { useState ,useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {UserContext} from '../contex/userContex.js'
 import Logout from "./Logout.jsx";
+import Loader from '../components/Loader.jsx'
 
 function Login() {
   const [userData, setUserData] = useState({
@@ -10,6 +11,7 @@ function Login() {
     password: "",
   });
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setCurrentUser } = useContext(UserContext);
 
@@ -22,18 +24,21 @@ function Login() {
     e.preventDefault();
     setError('');
     try {
+      setIsLoading(true)
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, userData);
       const user = await response.data;
       setCurrentUser(user)
-      setTimeout(() => {
-        setCurrentUser(null);
-      }, 3600*1000);
+      setIsLoading(false)
       navigate('/');
     } catch (error) {
       setError(error.response.data.message || "An error occurred. Please try again.");
+      setIsLoading(false)
+
     }
   };
-  
+  if (isLoading){
+    return <Loader/>
+  }
 
 
 

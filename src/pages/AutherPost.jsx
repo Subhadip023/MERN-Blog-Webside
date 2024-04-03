@@ -13,7 +13,6 @@ function AutherPost() {
     setIsloading(true)
      axios.get(`${process.env.REACT_APP_BASE_URL}/posts/users/${id}`)
       .then(response => {
-        console.log(response.data)
         setIsloading(false)
         setPosts(response.data);
       })

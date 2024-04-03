@@ -13,14 +13,14 @@ TimeAgo.addLocale(ru);
 
 const PostAuther = ({ authorID, updatedAt }) => {
   const [author, setAuthor] = useState(null);
-  const [avatar, setAvatar] = useState(Avatar);
+  // const [avatar, setAvatar] = useState(Avatar);
 
   useEffect(() => {
     const getAuthor = async () => {
       try {
         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/${authorID}`);
         setAuthor(response?.data);
-setAvatar(response.data.avatar)
+        // console.log(response.data)  
       } catch (error) {
         console.log(error);
       }
@@ -32,12 +32,19 @@ setAvatar(response.data.avatar)
   return (
     <Link to={`/posts/users/${authorID}`} className="post_author">
       <div className="post_author-avatar">
-        <img src={avatar} alt="Author Avatar" />
+        {author && author.avatar ? (
+          <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${author.avatar}`} alt="Author Avatar" />
+        ) : (
+          <img src={Avatar} alt="Default Avatar" />
+        )}
+
+        {/* <img src={avatar||author.avatar} alt="Author Avatar" /> */}
       </div>
       <div className="post_author-details">
         {author && (
           <>
             <h5>By: {upperCase1st(author.name)}</h5>
+            
             <small><ReactTimeAgo date={new Date(updatedAt)} locale="en" /></small>
           </>
         )}

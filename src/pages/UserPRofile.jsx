@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { FaEdit, FaCheck } from "react-icons/fa";
 import { UserContext } from "../contex/userContex";
 import upperCase1st from "../uppercase1st";
+import userAvater from '../img/Author-img/user-33638_640.png'
 import axios from "axios";
 
 function UserProfile() {
@@ -17,34 +18,28 @@ function UserProfile() {
 
   const { id } = useParams();
 
-  const changeAvatarHandler = async () => {
-    setIsAvatarTouched(false);
-    try {
-      // Convert image to base64
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const base64Image = event.target.result;
-  
-        // Send base64 image to server
-        try {
-        setAvatar(base64Image)
-          const response = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
-            { avatar: base64Image}, {
-              withCredentials: true,
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          // setAvatar(response.data.avatar);
-        } catch (error) {
-          console.error("Error sending base64 image to server:", error);
-        }
-      };
-      reader.readAsDataURL(avatar);
-    } catch (error) {
-      console.error("Error converting image to base64:", error);
-    }
-  };
+const changeAvatarHandler = async () => {
+  setIsAvatarTouched(false);
+  try {
+    const formData = new FormData();
+    formData.append("avatar", avatar); // Append the file directly, no need for base64 conversion
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
+      formData, // Send the FormData containing the file
+      {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    
+    // Assuming response.data.avatar contains the URL of the updated avatar
+    setAvatar(response.data.avatar);
+  } catch (error) {
+    console.error("Error updating avatar:", error);
+  }
+};
+
   
 
   const handleSubmit = (e) => {
@@ -62,9 +57,10 @@ function UserProfile() {
         </Link>
         <div className="profile_details">
           <div className="avater_wrapper">
-            <div className="profile_avatar">
-              <img src={avatar} alt="" />
-            </div>
+          <div className="profile_avatar">
+  <img src={userAvater} alt="User Avatar" />
+</div>
+
             {/* Form to update avatar */}
             <form className="avatar_form">
               <input
