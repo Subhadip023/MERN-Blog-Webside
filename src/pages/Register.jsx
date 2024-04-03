@@ -20,6 +20,12 @@ function Register() {
   const registerUser = async (e) => {
     e.preventDefault();
     setError("");
+  
+    // Validate password length
+    if (userData.password.length < 6 || userData.password.length > 17) {
+      return setError("Password should be between 6 and 16 characters.");
+    }
+  
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/users/register`,
@@ -34,9 +40,10 @@ function Register() {
         navigate("/login"); // Use Navigate
       }
     } catch (error) {
-      setError(error.response.data.message); // Provide a generic error message
+      setError(error.response.data.message || "An error occurred. Please try again.");
     }
   };
+  
 
   return (
     <section className="register">
