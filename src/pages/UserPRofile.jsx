@@ -1,53 +1,99 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaEdit, FaCheck } from "react-icons/fa";
 import { UserContext } from "../contex/userContex";
-import upperCase1st from "../uppercase1st";
-import userAvater from '../img/Author-img/user-33638_640.png'
+import Loader from "../components/Loader.jsx";
+import upperCase1st from "../uppercase1st.js";
 import axios from "axios";
 
 function UserProfile() {
   const { currentUser } = useContext(UserContext);
   const token = currentUser.token;
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState("");
+  const [email, setEmail] = useState("");
   const [name, setName] = useState(`${currentUser.name}`);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [isAvatarTouched, setIsAvatarTouched] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const { id } = useParams();
-
-const changeAvatarHandler = async () => {
-  setIsAvatarTouched(false);
-  try {
-    const formData = new FormData();
-    formData.append("avatar", avatar); // Append the file directly, no need for base64 conversion
-
-    const response = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
-      formData, // Send the FormData containing the file
-      {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
+  useEffect(() => {
+    const getAuthor = async () => {
+      try {
+        setIsLoading(true);
+        const user = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/${id}`
+        );
+        setAvatar(user.data.avatar);
+        setEmail(user.data.email);
+        setIsLoading(false);
+        console.log(avatar)
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
       }
-    );
-    
-    // Assuming response.data.avatar contains the URL of the updated avatar
-    setAvatar(response.data.avatar);
-  } catch (error) {
-    console.error("Error updating avatar:", error);
-  }
-};
+    };
+    getAuthor();
+  }, []);
 
-  
+  const changeAvatarHandler = async () => {
+    setIsAvatarTouched(false);
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("avatar", avatar);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    // Example:
-    console.log("Form submitted!");
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
+        formData, // Send the FormData containing the file
+        {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // Assuming response.data.avatar contains the URL of the updated avatar
+      setAvatar(response.data.avatar);
+      setIsLoading(false);
+    } catch (error) {
+      setError(
+        error.response.data.message || "An error occurred. Please try again."
+      );
+      setIsLoading(false);
+    }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.set("name", currentUser.name);
+      formData.set("email", email);
+      formData.set("currentPassword", currentPassword);
+      formData.set("newPassword", newPassword);
+      formData.set("confirmPassword", confirmNewPassword);
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/edit-user`,
+        formData, // Send the FormData containing the file
+        {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setIsLoading(false);
+    } catch (error) {
+      setError(error.response.data.message || "An error occurred. Please try again.");
+      setIsLoading(false)
+    }
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className="profile">
@@ -57,9 +103,12 @@ const changeAvatarHandler = async () => {
         </Link>
         <div className="profile_details">
           <div className="avater_wrapper">
-          <div className="profile_avatar">
-  <img src={userAvater} alt="User Avatar" />
-</div>
+            <div className="profile_avatar">
+              <img
+                src={avatar}
+                alt="User Avatar"
+              />
+            </div>
 
             {/* Form to update avatar */}
             <form className="avatar_form">
@@ -85,7 +134,7 @@ const changeAvatarHandler = async () => {
           </div>
           <h1>{upperCase1st(currentUser.name)}</h1>
           <form className="form profile_form" onSubmit={handleSubmit}>
-            <p className="form__error-message">This is an Error Message</p>
+            {error && <p className="form__error-message">{error}</p>}
             <input
               type="text"
               placeholder="Full Name"

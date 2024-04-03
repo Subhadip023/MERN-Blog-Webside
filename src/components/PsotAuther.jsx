@@ -33,7 +33,7 @@ const PostAuther = ({ authorID, updatedAt }) => {
     <Link to={`/posts/users/${authorID}`} className="post_author">
       <div className="post_author-avatar">
         {author && author.avatar ? (
-          <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${author.avatar}`} alt="Author Avatar" />
+          <img src={author.avatar} alt="Author Avatar" />
         ) : (
           <img src={Avatar} alt="Default Avatar" />
         )}
