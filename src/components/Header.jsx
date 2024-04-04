@@ -1,6 +1,6 @@
 import React, { useState ,useContext,useEffect} from "react";
 import { Link } from "react-router-dom";
-import Logo from "../img/SBlog-logo.png";
+import Logo from "../img/TechTrove Tribune .png";
 import { CiMenuBurger } from "react-icons/ci";
 import { ImCross } from "react-icons/im";
 
@@ -73,7 +73,7 @@ function Header() {
             className="nav_toggle-btn"
             onClick={() => setIsNavShowing(!isNavShowing)}
           >
-            {isNavShowing ? <ImCross /> : <CiMenuBurger />}
+            {isNavShowing ? <ImCross  className="cross-icon"/> : <CiMenuBurger className="menu-icon"/>}
           </button>{" "}
         </div>{" "}
       </nav>

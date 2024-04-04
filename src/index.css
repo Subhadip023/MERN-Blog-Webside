@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap')
+;
+
 * {
   margin: 0;
   padding: 0;
@@ -43,7 +47,7 @@ a {
 ul {
   list-style: none;
 }
-h1,h2,h3,h4,h5{
+h1,h2,h3,h4{
   color: var(--color3);
 }
 
@@ -140,7 +144,7 @@ nav {
   border: 2px solid var(--color3)
 }
 .nav_logo  img:hover{
-  box-shadow: 0px 4px 12px;
+  box-shadow: 0px 4px 12px var(--color3);
 
 
 }
@@ -149,6 +153,9 @@ nav {
   display: flex;
   align-items: center;
   gap: 3rem;
+}
+.nav_menu li a:hover{
+  color: var(--color3);
 }
 
 /* Footer style */
@@ -184,6 +191,57 @@ footer {
 }
 
 /* Home */
+/* Banner */
+.banner {
+  display: flex;
+  /* background: var(--color2); */
+  padding: 1rem;
+  min-height: 30vh;
+  max-height: fit-content;
+  padding-bottom: 2rem;
+  transition: var(--transition);
+  font-size: 1.5rem;
+  align-items: center;
+  gap: 50px;
+ 
+}
+.banner::before{
+  content: "";
+  position: absolute;
+  top: 6rem; /* Adjust position of the background image within the div */
+  left: 0%; /* Adjust position of the background image within the div */
+  right: 0%; /* Adjust position of the background image within the div */
+  bottom: 20%; /* Adjust position of the background image within the div */
+  height: 50vh;
+  width: 100%;
+  background-image: url('../src/img/digital-8280787_640.jpg');
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+
+.banner h1{
+  color: white;
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  opacity: 1;
+  text-align: justify;
+
+
+}
+.Highlightted{
+  color: var(--color3);
+  opacity: 1;
+}
+
+.banner-img img{
+  height: 30vh;
+  width:  30vh;
+  border-radius: 50%;
+  border: 2px solid var(--color3);
+}
 
 /* Posts */
 .post_conatainer,
@@ -332,7 +390,7 @@ textarea {
   gap: 3rem;
 }
 .author {
-  background: var(--color-white);
+  background: var(--color2);
   padding: 1rem;
   border-radius: var(--radius-3);
   display: flex;
@@ -340,14 +398,14 @@ textarea {
   transition: var(--transition);
 }
 .author:hover {
-  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1rem 1.5rem var(--color3);
 }
 
 .author_avatar {
   width: 5rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  border: 0.3rem solid var(--color-bg);
+  border: 0.3rem solid var(--color3);
   overflow: hidden;
 }
 
@@ -416,6 +474,11 @@ textarea {
   width: var(--form-width);
 }
 
+.cross-icon,.menu-icon{
+  color: var(--color3);
+}
+
+
 /* DashBoard */
 
 .dashboard_container {
@@ -483,7 +546,7 @@ textarea {
   }
   .nav_menu li a {
     display: block;
-    background: var(--color-white);
+    background: var(--color2);
     padding: 0.85rem 2.5rem;
   }
   .nav_toggle-btn {
@@ -550,5 +613,55 @@ padding-left: 6px;
   .footer_categories {
     flex-direction: column;
   }
+
+  .banner {
+    display: flex;
+    /* background: var(--color2); */
+    padding: 1rem;
+    min-height: 30vh;
+    max-height: fit-content;
+    padding-bottom: 2rem;
+    transition: var(--transition);
+    font-size: 1rem;
+    align-items: center;
+    gap: 0px;
+   
+  }
+  .banner::before{
+    content: "";
+    position: absolute;
+    top: 6rem; /* Adjust position of the background image within the div */
+    left: 0%; /* Adjust position of the background image within the div */
+    right: 0%; /* Adjust position of the background image within the div */
+    bottom: 20%; /* Adjust position of the background image within the div */
+    height: 60vh;
+    width: 100%;
+    background-image: url('../src/img/digital-8280787_640.jpg');
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.3;
+  }
+  
+  
+  .banner h1{
+    color: white;
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    opacity: 1;
+    text-align: justify;
+  
+  
+  }
+  .Highlightted{
+    color: var(--color3);
+    opacity: 1;
+  }
+  
+  .banner-img img{
+    display: none;
+  }
+  
+
 
 }
