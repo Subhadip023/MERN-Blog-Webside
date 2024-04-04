@@ -31,8 +31,7 @@ const sanitizeHTML = (html) => ({
           `${process.env.REACT_APP_BASE_URL}/posts/${id}`
         );
         setPost(response.data);
-        console.log((response.data))
-        console.log(id)
+       
       } catch (error) {
         setError(error);
       }
