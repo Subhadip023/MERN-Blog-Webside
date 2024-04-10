@@ -47,14 +47,18 @@ function CreatePost() {
   ];
 
   const POST_CATEGORIES = [
-    "Agriculture",
-    "Business",
-    "Education",
-    "Entertainment",
-    "Art",
-    "Investment",
-    "Uncategorized",
-    "Weather",
+    "Science News",
+  "Technology Trends",
+  "Innovation and Startups",
+  "Gadgets and Gear Reviews",
+  "How-To Guides and Tutorials",
+  "Science Education and Outreach",
+  "Future Tech and Futurism",
+  "Tech and Society",
+  "Data Science and Analytics",
+  "Entrepreneurship and Business",
+  "Internet and Digital Culture",
+  "Green Tech and Sustainability"
   ];
 
   const navigate = useNavigate();

@@ -20,7 +20,7 @@ function DeletePost({ id }) { // Destructure id properly here
       );
 
       if (response.status === 200) {
-        if (location.pathname === `/myposts/${currentUser.id}`) {
+        if (location.pathname === `/myposts/${currentUser.id}/delete`) {
           history(0); // Go back in history
           return;
         }

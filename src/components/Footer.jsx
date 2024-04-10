@@ -1,38 +1,37 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
+
+const categories = [
+  "Science News",
+  "Technology Trends",
+  "Innovation and Startups",
+  "Gadgets and Gear Reviews",
+  "How-To Guides and Tutorials",
+  "Science Education and Outreach",
+  "Future Tech and Futurism",
+  "Tech and Society",
+  "Data Science and Analytics",
+  "Entrepreneurship and Business",
+  "Internet and Digital Culture",
+  "Green Tech and Sustainability"
+];
+
 function Footer() {
+
+
   return (
     <footer>
-      <ul className="footer_categories">
-        <li>
-          <Link to="/posts/categories/Agriculture">Agriculture</Link>
-        </li>{" "}
-        <li>
-          <Link to="/posts/categories/Business">Business</Link>
+       <ul className="footer_categories">
+      {categories.map(category => (
+        <li key={category}>
+          <Link to={`/posts/categories/${category}`}>{category}</Link>
         </li>
-        <li>
-          <Link to="/posts/categories/Education">Education</Link>
-        </li>
-        <li>
-          <Link to="/posts/categories/Entertainment">Entertainment</Link>
-        </li>
-        <li>
-          <Link to="/posts/categories/Art">Art</Link>
-        </li>
-        <li>
-          <Link to="/posts/categories/Investment">Investment</Link>
-        </li>
-        <li>
-          <Link to="/posts/categories/Uncategorized">Uncategorized</Link>
-        </li>
-        <li>
-          <Link to="/posts/categories/Weather">Weather</Link>
-        </li>
-      </ul>
+      ))}
+    </ul>
       <div className="footer_copyright">
         <small>
-          All Right Resolved &copy; copyright, SBlog 
+          All Right Resolved &copy; copyright, TechTrove Tribune 
         </small>
       </div>
     </footer>
