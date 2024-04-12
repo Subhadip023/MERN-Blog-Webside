@@ -56,7 +56,7 @@ const sanitizeHTML = (html) => ({
                 <Link to={`/post/${post._id}/edit`} className="btn sm primary">
                   Edit
                 </Link>
-                <DeletePost id={id} />
+                <DeletePost id={post._id} />
               </div>
             )}
           </div>

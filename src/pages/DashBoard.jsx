@@ -1,14 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import DeletePost from "./DeletePost.jsx";
+
+
 import axios from "axios";
 
 import { UserContext } from "../contex/userContex.js";
+import Loader from "../components/Loader.jsx";
 
 function DashBoard() {
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!currentUser?.token) {
@@ -16,9 +21,10 @@ function DashBoard() {
     } else {
       const getPost = async () => {
         try {
+          setIsLoading(true)
           const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/users/${id}`);
           setPosts(response.data);
-          console.log(response.data)
+          setIsLoading(false)
         } catch (error) {
           console.error("Error fetching posts:", error);
         }
@@ -26,6 +32,10 @@ function DashBoard() {
       getPost();
     }
   }, [currentUser, navigate, id]);
+
+if(isLoading){
+  return <Loader/>
+}
 
   return (
     <section className="dashboard">
@@ -46,14 +56,13 @@ function DashBoard() {
                 <Link to={`/post/${post._id}/edit`} className="btn sm primary">
                   Edit
                 </Link>
-                <Link to={`/post/${post._id}/delete`} className="btn sm danger">
-                  Delete
-                </Link>
+                <DeletePost id={post._id} />
+
               </div>
             </article>
           ))}
         </div>
-      ) : (
+      ) : ( 
         <h2 className="center">You have No posts yet</h2>
       )}
     </section>
