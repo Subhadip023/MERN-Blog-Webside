@@ -11,7 +11,7 @@ import ru from 'javascript-time-ago/locale/ru.json';
 TimeAgo.addLocale(en); 
 TimeAgo.addLocale(ru);
 
-const PostAuther = ({ authorID, updatedAt }) => {
+const PostAuther = ({ authorID, updatedAt ,readTime}) => {
   const [author, setAuthor] = useState(null);
   // const [avatar, setAvatar] = useState(Avatar);
 
@@ -45,7 +45,7 @@ const PostAuther = ({ authorID, updatedAt }) => {
           <>
             <h5>By: {upperCase1st(author.name)}</h5>
             
-            <small><ReactTimeAgo date={new Date(updatedAt)} locale="en" /></small>
+            <small><ReactTimeAgo date={new Date(updatedAt)} locale="en" /></small> {readTime ?   <small className="post_readTime"> {readTime} min read</small>:" "}
           </>
         )}
       </div>

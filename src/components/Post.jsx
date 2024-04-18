@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Postitem from "./Postitem";
 import Loader from './Loader' 
+import Logo from '../img/TechTrove Tribune.png'
+
 
 function Post() {
   const [posts, setPosts] = useState([]);
@@ -24,8 +26,26 @@ if(isloading){
   return <Loader />;
 }
 
-  return (
-    <section className="posts">
+  return ( 
+
+    <>
+ <section > 
+      <div className="banner container">
+      <div className="text">
+         
+      <h1>
+       
+       <span className='Highlightted'>Welcome</span> to TechTrove Tribune, your premier destination for the latest insights, news, and developments in the ever-evolving world of science and technology. Explore our curated collection of articles, analyses, and features covering a wide range of topics, from cutting-edge innovations to fascinating discoveries. Join us on a journey through the digital frontier, where every click brings you closer to the forefront of technological advancement. Stay informed, inspired, and engaged with TechTrove Tribune.
+     </h1>
+      </div>
+<div className="banner-img">
+          <img src={Logo} alt="Banner Image" />
+        </div>
+      </div>
+  
+    </section>
+    
+     <section className="posts">
       <div className="container post_conatainer">
         {posts.length > 0 ? (
           posts.map(post => (
@@ -48,6 +68,8 @@ if(isloading){
         )}
       </div>
     </section>
+    </>
+   
   );
 }
 
